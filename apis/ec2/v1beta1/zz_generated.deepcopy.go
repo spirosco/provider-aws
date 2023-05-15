@@ -32562,16 +32562,6 @@ func (in *VPCEndpointConnectionNotificationParameters) DeepCopyInto(out *VPCEndp
 		*out = new(string)
 		**out = **in
 	}
-	if in.ConnectionNotificationArnRef != nil {
-		in, out := &in.ConnectionNotificationArnRef, &out.ConnectionNotificationArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ConnectionNotificationArnSelector != nil {
-		in, out := &in.ConnectionNotificationArnSelector, &out.ConnectionNotificationArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

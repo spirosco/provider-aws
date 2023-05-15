@@ -9,10 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -576,8 +575,8 @@ func (mg *FlowLog) ResolveReferences(ctx context.Context, c client.Reader) error
 		Reference:    mg.Spec.ForProvider.LogDestinationRef,
 		Selector:     mg.Spec.ForProvider.LogDestinationSelector,
 		To: reference.To{
-			List:    &v1beta12.GroupList{},
-			Managed: &v1beta12.Group{},
+			List:    &v1beta12.BucketList{},
+			Managed: &v1beta12.Bucket{},
 		},
 	})
 	if err != nil {
@@ -2638,22 +2637,6 @@ func (mg *VPCEndpointConnectionNotification) ResolveReferences(ctx context.Conte
 
 	var rsp reference.ResolutionResponse
 	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionNotificationArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.ForProvider.ConnectionNotificationArnRef,
-		Selector:     mg.Spec.ForProvider.ConnectionNotificationArnSelector,
-		To: reference.To{
-			List:    &v1beta13.TopicList{},
-			Managed: &v1beta13.Topic{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ConnectionNotificationArn")
-	}
-	mg.Spec.ForProvider.ConnectionNotificationArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ConnectionNotificationArnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCEndpointServiceID),

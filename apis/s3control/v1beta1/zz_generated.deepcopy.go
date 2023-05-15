@@ -919,16 +919,6 @@ func (in *AwsLambdaParameters) DeepCopyInto(out *AwsLambdaParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.FunctionArnRef != nil {
-		in, out := &in.FunctionArnRef, &out.FunctionArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.FunctionArnSelector != nil {
-		in, out := &in.FunctionArnSelector, &out.FunctionArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.FunctionPayload != nil {
 		in, out := &in.FunctionPayload, &out.FunctionPayload
 		*out = new(string)

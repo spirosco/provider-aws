@@ -10,7 +10,6 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -142,30 +141,6 @@ func (mg *ObjectLambdaAccessPoint) ResolveReferences(ctx context.Context, c clie
 		mg.Spec.ForProvider.Configuration[i3].SupportingAccessPoint = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Configuration[i3].SupportingAccessPointRef = rsp.ResolvedReference
 
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Configuration); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation); i5++ {
-				for i6 := 0; i6 < len(mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda); i6++ {
-					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArn),
-						Extract:      resource.ExtractParamPath("arn", true),
-						Reference:    mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArnRef,
-						Selector:     mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArnSelector,
-						To: reference.To{
-							List:    &v1beta12.FunctionList{},
-							Managed: &v1beta12.Function{},
-						},
-					})
-					if err != nil {
-						return errors.Wrap(err, "mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArn")
-					}
-					mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
-					mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArnRef = rsp.ResolvedReference
-
-				}
-			}
-		}
 	}
 
 	return nil

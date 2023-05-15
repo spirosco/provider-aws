@@ -25,18 +25,8 @@ type AwsLambdaObservation struct {
 type AwsLambdaParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
-
-	// Reference to a Function in lambda to populate functionArn.
-	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
-
-	// Selector for a Function in lambda to populate functionArn.
-	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
 
 	// Additional JSON that provides supplemental data to the Lambda function used to transform objects.
 	// +kubebuilder:validation:Optional

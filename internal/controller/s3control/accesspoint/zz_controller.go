@@ -19,7 +19,6 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1beta1 "github.com/upbound/provider-aws/apis/s3control/v1beta1"
-	features "github.com/upbound/provider-aws/internal/features"
 )
 
 // Setup adds a controller that reconciles AccessPoint managed resources.
@@ -41,9 +40,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		managed.WithInitializers(initializers),
 		managed.WithConnectionPublishers(cps...),
 		managed.WithPollInterval(o.PollInterval),
-	}
-	if o.Features.Enabled(features.EnableAlphaManagementPolicies) {
-		opts = append(opts, managed.WithManagementPolicies())
 	}
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.AccessPoint_GroupVersionKind), opts...)
 

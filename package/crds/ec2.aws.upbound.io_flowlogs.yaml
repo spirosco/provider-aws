@@ -173,8 +173,7 @@ spec:
                       or log_group_name must be set.
                     type: string
                   logDestinationRef:
-                    description: Reference to a Group in cloudwatchlogs to populate
-                      logDestination.
+                    description: Reference to a Bucket in s3 to populate logDestination.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -208,8 +207,7 @@ spec:
                     - name
                     type: object
                   logDestinationSelector:
-                    description: Selector for a Group in cloudwatchlogs to populate
-                      logDestination.
+                    description: Selector for a Bucket in s3 to populate logDestination.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

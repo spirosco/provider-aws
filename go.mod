@@ -6,7 +6,6 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.16.15
 	github.com/aws/aws-sdk-go-v2/config v1.10.0
 	github.com/aws/aws-sdk-go-v2/credentials v1.6.0
-	github.com/aws/aws-sdk-go-v2/service/eks v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.9.0
 	github.com/aws/smithy-go v1.13.3
 	github.com/crossplane/crossplane-runtime v0.20.0-rc.0.0.20230406155702-4e1673b7141f
@@ -92,7 +91,6 @@ require (
 	github.com/iancoleman/strcase v0.2.0 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
-	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect

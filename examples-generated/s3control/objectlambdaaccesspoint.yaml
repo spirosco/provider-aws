@@ -17,9 +17,7 @@ spec:
         - GetObject
         contentTransformation:
         - awsLambda:
-          - functionArnSelector:
-              matchLabels:
-                testing.upbound.io/example-name: example
+          - functionArn: ${aws_lambda_function.example.arn}
     name: example
     region: us-west-1
 

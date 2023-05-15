@@ -49,9 +49,7 @@ spec:
     - triggerEvents:
       - DeploymentFailure
       triggerName: foo-trigger
-      triggerTargetArnSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+      triggerTargetArn: foo-topic-arn
 
 ---
 

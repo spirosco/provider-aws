@@ -122,16 +122,16 @@ type FlowLogParameters struct {
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the logging destination. Either log_destination or log_group_name must be set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
-	// Reference to a Group in cloudwatchlogs to populate logDestination.
+	// Reference to a Bucket in s3 to populate logDestination.
 	// +kubebuilder:validation:Optional
 	LogDestinationRef *v1.Reference `json:"logDestinationRef,omitempty" tf:"-"`
 
-	// Selector for a Group in cloudwatchlogs to populate logDestination.
+	// Selector for a Bucket in s3 to populate logDestination.
 	// +kubebuilder:validation:Optional
 	LogDestinationSelector *v1.Selector `json:"logDestinationSelector,omitempty" tf:"-"`
 

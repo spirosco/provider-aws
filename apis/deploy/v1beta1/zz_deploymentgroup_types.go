@@ -353,17 +353,8 @@ type ELBInfoObservation struct {
 type ELBInfoParameters struct {
 
 	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Reference to a ELB in elb to populate name.
-	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
-
-	// Selector for a ELB in elb to populate name.
-	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type EcsServiceObservation struct {
@@ -378,30 +369,12 @@ type EcsServiceObservation struct {
 type EcsServiceParameters struct {
 
 	// The name of the ECS cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Cluster
-	// +kubebuilder:validation:Optional
-	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
-
-	// Reference to a Cluster in ecs to populate clusterName.
-	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
-
-	// Selector for a Cluster in ecs to populate clusterName.
-	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	ClusterName *string `json:"clusterName" tf:"cluster_name,omitempty"`
 
 	// The name of the ECS service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Service
-	// +kubebuilder:validation:Optional
-	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
-
-	// Reference to a Service in ecs to populate serviceName.
-	// +kubebuilder:validation:Optional
-	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
-
-	// Selector for a Service in ecs to populate serviceName.
-	// +kubebuilder:validation:Optional
-	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
 }
 
 type GreenFleetProvisioningOptionObservation struct {
@@ -533,18 +506,8 @@ type TargetGroupPairInfoParameters struct {
 type TargetGroupParameters struct {
 
 	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Reference to a LBTargetGroup in elbv2 to populate name.
-	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
-
-	// Selector for a LBTargetGroup in elbv2 to populate name.
-	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type TerminateBlueInstancesOnDeploymentSuccessObservation struct {
@@ -603,18 +566,8 @@ type TriggerConfigurationParameters struct {
 	TriggerName *string `json:"triggerName" tf:"trigger_name,omitempty"`
 
 	// The ARN of the SNS topic through which notifications are sent.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	TriggerTargetArn *string `json:"triggerTargetArn,omitempty" tf:"trigger_target_arn,omitempty"`
-
-	// Reference to a Topic in sns to populate triggerTargetArn.
-	// +kubebuilder:validation:Optional
-	TriggerTargetArnRef *v1.Reference `json:"triggerTargetArnRef,omitempty" tf:"-"`
-
-	// Selector for a Topic in sns to populate triggerTargetArn.
-	// +kubebuilder:validation:Optional
-	TriggerTargetArnSelector *v1.Selector `json:"triggerTargetArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	TriggerTargetArn *string `json:"triggerTargetArn" tf:"trigger_target_arn,omitempty"`
 }
 
 // DeploymentGroupSpec defines the desired state of DeploymentGroup
